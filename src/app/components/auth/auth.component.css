@@ -1,0 +1,11 @@
+.defualt-input{
+    display: block
+}
+
+.auth-body {
+    margin:auto;
+    display: inline-block;
+    width: 90%;
+    /* text-align: center; */
+    padding: 20px;
+}

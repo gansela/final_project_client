@@ -1,0 +1,17 @@
+.main-body div{
+    margin: 20px;
+    height: 500px;
+    background-color: rgb(255, 126, 0);
+    flex-grow: 1;
+}
+.main-body{
+    margin-top: 20px;
+    display: flex;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .main-body {
+        display: block
+    }
+  }  

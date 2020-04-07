@@ -1,0 +1,17 @@
+<div class="auth-body">
+    <h3>Do you have an acount?</h3>
+    <form [formGroup]="logInForm">
+        <mat-form-field class="defualt-input">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="text" />
+        </mat-form-field>
+        <mat-form-field class="defualt-input">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="text" />
+        </mat-form-field>
+    </form>
+    <div>
+        <button mat-button (click)="logInFunc()">Log In</button>
+        <button mat-button>Register</button>
+    </div>
+</div>

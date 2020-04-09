@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbar, MatFormFieldModule, MatInputModule, MatCardModule } from "@angular/material";
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,13 +12,15 @@ import { InterceptorService} from './services/interceptor/interceptor.service';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MatToolbar,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { HomeComponent } from './components/home/home.component';
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
-
+    MatSelectModule
   ],
   providers: [InterceptorService,
     { useClass: InterceptorService, provide: HTTP_INTERCEPTORS, multi: true }

@@ -12,7 +12,6 @@ export class AuthService {
     this.userName = new Subject<string>();
   }
   changeUserName(data) {
-    console.log(data + "    here")
     this.userName.next(data)
   }
 
@@ -34,11 +33,30 @@ export class AuthService {
     return res
   }
 
-  async postVerify(session) {
+  async postRegister(data) {
+    const { basePath } = this
+    const uri = `${basePath}auth/reg`
+    const res: any = await this.http.post(uri, data).toPromise()
+    if (res.err) {
+      alert("registration failed")
+    }
+    // console.log(res)
+    return res
+  }
+
+  async postVerify() {
     const { basePath } = this
     const uri = `${basePath}store/verify`
-    const res: any = await this.http.post(uri, session).toPromise()
+    const res: any = await this.http.post(uri, {}).toPromise()
     if (!res.err) this.changeUserName(res.email)
     return res
+  }
+
+  async getCities() {
+    const { basePath } = this
+    const uri = `${basePath}auth/cities`
+    const res: any = await this.http.get(uri).toPromise()
+    if (res.err) return alert(res.msg)
+    return res.cities
   }
 }

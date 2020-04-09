@@ -10,7 +10,7 @@ export class InterceptorService implements HttpInterceptor {
     //validate token..
     // const token = localStorage.getItem("token");
     // if (typeof token !== 'string') return null;
-    const token = sessionStorage.getItem("token")
+    const token = sessionStorage.getItem("token") || ""
     const newRequest = request.clone({
       headers: request.headers.set("session", token)
     });

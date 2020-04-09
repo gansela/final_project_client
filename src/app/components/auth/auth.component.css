@@ -9,3 +9,10 @@
     /* text-align: center; */
     padding: 20px;
 }
+.text-red{
+    color: red;
+}
+
+.d-none{
+    display: none
+}

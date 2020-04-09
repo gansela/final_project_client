@@ -15,13 +15,13 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const session = sessionStorage.getItem("token")
+    const session = sessionStorage.getItem("token") || ""
     this.authService.getUserName().subscribe((value) => {
-      console.log(value)
+      // console.log(value)
       this.userName = value;
     });
-    const res: any = await this.authService.postVerify(session)
-    console.log(res)
+    const res: any = await this.authService.postVerify()
+    // console.log(res)
     if (res.err) {
       alert(res.msg)
       return sessionStorage.setItem('token', "")

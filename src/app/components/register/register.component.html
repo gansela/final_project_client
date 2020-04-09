@@ -1,0 +1,65 @@
+<div class="register-body">
+    <h3>
+        <div class="warp">Register <span class="float-r">step {{page}}</span></div>
+    </h3>
+    <div *ngIf="page === 1">
+        <form [formGroup]="registerForm1">
+            <mat-form-field class="defualt-input">
+                <mat-label>ID</mat-label>
+                <input [class.is-invalid]="id.invalid" matInput formControlName="id" type="text" />
+                <small [class.d-none]="id.valid || id.untouched" class="text-red">ID not valid </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Email</mat-label>
+                <input [class.is-invalid]="email.invalid" matInput formControlName="email" type="text" />
+                <small [class.d-none]="email.valid || email.untouched" class="text-red">email not valid </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Password </mat-label>
+                <input [class.is-invalid]="password.invalid" matInput formControlName="password" type="password" />
+                <small [class.d-none]="password.valid || password.untouched" class="text-red">Password not valid (min 6
+                    charcters) </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label> Confirm Password </mat-label>
+                <input [class.is-invalid]="passwordConfirm.invalid" matInput formControlName="passwordConfirm"
+                    type="password" />
+                <small [class.d-none]="passwordConfirm.valid || passwordConfirm.untouched" class="text-red">Feild
+                    required</small>
+            </mat-form-field>
+        </form>
+        <button mat-button (click)="movePage(2)" [disabled]="registerForm1.invalid" class="float-r">Next</button>
+    </div>
+
+    <div *ngIf="page === 2">
+        <form [formGroup]="registerForm2">
+            <mat-form-field class="defualt-input">
+                <mat-label>Place Of Residence</mat-label>
+                <mat-select  [class.is-invalid]="place_of_residence.invalid" formControlName="place_of_residence">
+                    <mat-option *ngFor="let city of citiesArray" [value]="city.name">
+                        {{city.name}}
+                      </mat-option>
+                </mat-select>
+                <small [class.d-none]="place_of_residence.valid || place_of_residence.untouched" class="text-red">Field Required </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Street Addres</mat-label>
+                <input [class.is-invalid]="street.invalid" matInput formControlName="street" type="text" />
+                <small [class.d-none]="street.valid || street.untouched" class="text-red">Field Required </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>First Name </mat-label>
+                <input [class.is-invalid]="first_name.invalid" matInput formControlName="first_name" type="text" />
+                <small [class.d-none]="first_name.valid || first_name.untouched" class="text-red">Field Required
+                </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label> Last Name </mat-label>
+                <input [class.is-invalid]="last_name.invalid" matInput formControlName="last_name" type="text" />
+                <small [class.d-none]="last_name.valid || last_name.untouched" class="text-red">Feild
+                    required</small>
+            </mat-form-field>
+        </form>
+        <button mat-button (click)="movePage(1)">Previous</button>
+        <button mat-button (click)="postRegister()" [disabled]="registerForm2.invalid" class="float-r">Submit</button>
+    </div>

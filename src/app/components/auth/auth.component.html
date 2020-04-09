@@ -3,15 +3,17 @@
     <form [formGroup]="logInForm">
         <mat-form-field class="defualt-input">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" type="text" />
+            <input  [class.is-invalid]="email.invalid" matInput formControlName="email" type="text" />
+            <small  [class.d-none]="email.valid || email.untouched" class="text-red">email not valid </small>
         </mat-form-field>
         <mat-form-field class="defualt-input">
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="text" />
+            <mat-label>Password </mat-label>
+            <input   [class.is-invalid]="password.invalid" matInput formControlName="password" type="password" />
+            <small  [class.d-none]="password.valid || password.untouched" class="text-red">Password not valid (min 6 charcters) </small>
         </mat-form-field>
     </form>
     <div>
-        <button mat-button (click)="logInFunc()">Log In</button>
-        <button mat-button>Register</button>
+        <button mat-button (click)="logInFunc()" [disabled]="logInForm.invalid">Log In</button>
+        <button mat-button routerLink="/register">Register</button>
     </div>
 </div>

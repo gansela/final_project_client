@@ -1,0 +1,35 @@
+.register-body {
+    margin:auto;
+    /* display: inline-block; */
+    width: 40%;
+    align-items: center;
+    padding: 20px;
+    margin-top: 3%;
+}
+
+.defualt-input{
+    display: block
+}
+
+.d-none{
+    display: none
+}
+
+.text-red{
+    color: red;
+}
+
+.warp{
+    width: 100%;
+border-bottom: 1px solid black;
+}
+
+.float-r {
+    float: right;
+}
+
+@media only screen and (max-width: 800px) {
+    .register-body {
+        width: 70%;
+    }
+  }  

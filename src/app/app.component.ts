@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const session = sessionStorage.getItem("token") || ""
     this.authService.getUserName().subscribe((value) => {
       // console.log(value)
       this.userName = value;

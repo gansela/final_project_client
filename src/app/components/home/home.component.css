@@ -1,14 +1,14 @@
 .main-body div{
     margin: 20px;
     height: 500px;
-    background-color: rgb(255, 126, 0);
+    border-radius: 5px;
     flex-grow: 1;
 }
 .main-body{
-    margin-top: 20px;
+    padding-top: 20px;
     display: flex;
-}
 
+}
 
 @media only screen and (max-width: 800px) {
     .main-body {

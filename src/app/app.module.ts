@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbar, MatFormFieldModule, MatInputModule, MatCardModule } from "@angular/material";
 import { MatSelectModule } from '@angular/material/select';
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RegisterComponent } from './components/register/register.component';
     MatToolbar,
     AuthComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { RegisterComponent } from './components/register/register.component';
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
   ],
   providers: [InterceptorService,
     { useClass: InterceptorService, provide: HTTP_INTERCEPTORS, multi: true }

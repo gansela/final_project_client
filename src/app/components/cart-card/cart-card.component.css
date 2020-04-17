@@ -1,0 +1,25 @@
+.middle-span{
+    padding: 0px 10px;
+    }
+.remove-buttom{
+    display: inline-block;
+    justify-content: center;
+    width: 15px;
+}
+span{
+    font-size: 0.9em
+}
+h4{
+    padding: 0px;
+    margin: 0px;
+}
+
+.card-body{
+    box-shadow: none;
+    background-color: transparent;
+    border-bottom:  1px grey solid;
+    border-radius: 0px;
+}
+.buttom-line{
+    margin-top: 15px
+}

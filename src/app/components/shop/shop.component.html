@@ -1,16 +1,31 @@
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Auto-resizing sidenav</p>
-      <p *ngIf="showMobileCart">Lorem, ipsum dolor sit amet consectetur.</p>
-      <button (click)="showMobileCart = !showMobileCart" mat-raised-button>
-        Toggle extra text
-      </button>
-    </mat-drawer>
-  
-    <div class="example-sidenav-content">
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Toggle sidenav
-      </button>
-    </div>
-  
-  </mat-drawer-container>
+<div class="shop-body">
+    
+    <mat-sidenav-container class="pc-container" >
+        <mat-sidenav mode="side"  class="pc-store" opened>
+            <h3>
+                <div class="warp">My Cart</div>
+            </h3>
+            <app-cart></app-cart>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <app-products></app-products>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+
+    <mat-drawer-container class="mobile-container" layout-fill>
+        <mat-drawer #drawer class="mobile-sidenav" mode="side" layout-fill>
+            <h3>
+                <div class="warp">My Cart</div>
+            </h3>
+            <app-cart></app-cart>
+        </mat-drawer>
+    
+        <div class="mobile-sidenav-content">
+            <button class="show-button" type="button" mat-raised-button color="accent" (click)="drawer.toggle()">
+                Cart
+            </button>
+            <app-products></app-products>
+        </div>
+    
+    </mat-drawer-container>
+</div>

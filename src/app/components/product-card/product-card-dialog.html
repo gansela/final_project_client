@@ -1,0 +1,15 @@
+
+<div mat-dialog-content>
+    <h1 mat-dialog-title>{{data.name}}</h1>
+  <span class="price-span">{{data.price}}  ₪ <span *ngIf="data.per"> a kg  </span> </span>
+  <mat-form-field class="amount-input">
+  <mat-label >Amount</mat-label>
+    <input matInput   type="number" step="0.1" *ngIf="data.per" placeholder="0" [(ngModel)]="data.amount" min="0" max="10">
+    <span matSuffix *ngIf="data.per">KG</span>
+    <input  matInput type="number"  *ngIf="!data.per" placeholder="0"  [(ngModel)]="data.amount" min="0" max="10">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.amount" cdkFocusInitial>Add</button>
+</div>

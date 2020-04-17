@@ -1,0 +1,11 @@
+<div>
+    <span>Total Price: {{cartPrice}}</span>
+</div>
+<div class="prod-card">
+    <div *ngFor="let card of products ">
+        <app-cart-card [cartObj]="card"></app-cart-card>
+    </div>
+</div>
+<div class="buttom-line">
+    <span *ngIf="products.length">Total Price: {{cartPrice}}</span>
+</div>

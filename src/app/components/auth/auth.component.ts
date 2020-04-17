@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms"
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,7 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
+  public subscription = new Subscription()
   public logInForm
   public cartStatus
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {
@@ -19,12 +21,23 @@ export class AuthComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.authService.getCartStatus().subscribe((value) => {
-      if (!value) this.cartStatus = value
-      else if (value === "new user" || value === "no") this.cartStatus = "Start Shopping"
-      else if (value === "yes") this.cartStatus = "resume shopping"
+   async ngOnInit() {
+    this.subscription = this.authService.getCartStatus().subscribe((value : any) => {
+      const { status }  = value
+      if (!value) this.cartStatus = status
+      else if (status === "new user" || status === "no") this.cartStatus = "Start Shopping"
+      else if (status === "yes") this.cartStatus = "resume shopping"
     });
+    const res: any = await this.authService.postVerify()
+    // console.log(res)
+    if (res.err) {
+      alert(res.msg)
+      return sessionStorage.setItem('token', "")
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
   async logInFunc() {

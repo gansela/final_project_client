@@ -1,0 +1,43 @@
+button{
+    margin: 0px 7px !important;
+    padding: 0px;
+    min-width: 1%;
+}
+
+.card_actions{
+    margin:-5px 0px !important;
+    padding:  0px 0px !important;
+    position: relative;
+    align-self: baseline;
+}
+.example-card {
+    box-shadow: none;
+    width: 120px;
+    height: 165px;
+    background-color: transparent;
+    border-bottom:  1px grey solid;
+    border-radius: 0px;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.example-card *{
+    font-size: small;
+}
+
+.card-image{
+    max-height: 90px;
+    box-sizing: border-box;
+    margin-left: 0px;
+}
+
+.card-title{
+    font-size: 1rem !important;
+}
+
+.price-span{
+    margin-right: 10px;
+    border-right: solid black 1px
+}
+
+

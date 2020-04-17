@@ -1,0 +1,10 @@
+<mat-card class="card-body">
+    <h4>{{cartObj.name}}</h4>
+    <span>units: {{cartObj.amount}}</span><span *ngIf="cartObj.per_kg"> kg</span>
+    <span class="middle-span">Price: {{cartObj.price}} ₪</span>
+    <div class="remove-buttom">
+        <button mat-mini-fab color="warn" (click)="removeItem()">
+            X
+        </button>
+    </div>
+</mat-card>

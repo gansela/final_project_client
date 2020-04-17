@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body, .pc-store { height: 100%; }
 body {
      margin: 0;
      font-family: Roboto, "Helvetica Neue", sans-serif; 
@@ -8,4 +8,23 @@ body {
      background: linear-gradient(117deg, rgba(255, 215, 198,1) 5%, rgba(250,250,250,1) 50%, rgba(255, 215, 198,1) 97%);
      background-repeat: no-repeat;
      background-attachment: fixed;
-    }
+}
+.mat-tab-label {
+     padding: 0 1px !important;
+     /* height: 100px !important; */
+}
+
+.formFieldWidth480 .mat-form-field-infix {
+     width: 80px;
+     display: inline-flex;
+     /* margin-left: 10px; */
+  }
+
+@media only screen and (max-width: 800px) {
+     .mat-tab-label * {
+          padding: 3px 3px !important;
+          border-left: 1px grey solid;
+          font-size: 0.8em;
+     }
+} 
+    

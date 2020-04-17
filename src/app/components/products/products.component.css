@@ -1,0 +1,23 @@
+.cards-flex{
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap !important; */
+    /* transform: translate3d(-100%, 0px, 0px); */
+    
+}
+.prod-card{
+    flex-grow: 1;
+    display: inline-block;
+    vertical-align: top;
+    max-height: 300px;
+    margin: 5px;
+}
+.search-prod{
+margin-left: 50px;
+
+}
+
+
+@media only screen and (max-width: 800px) {
+
+  }  

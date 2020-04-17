@@ -1,15 +1,60 @@
-.example-container {
-  height: 500px;
-  /* border: 1px solid rgba(0, 0, 0, 0.5); */
+.shop-body{
+  height: 100vh;
 }
 
-.example-sidenav-content {
+.pc-container{
+    display: flex;
+    position: absolute;
+    min-height: 100vh;
+    background-color: transparent;
+}
+
+.show-button{
+  position: relative;
+align-self: flex-start;
+margin-top: 58px;
+}
+.pc-store{
+    min-height: 100vh;
+    min-width: 300px;
+    background: turquoise;
+    background: linear-gradient(117deg, rgba(64, 224, 208,1) 5%, rgba(250,250,250,1) 50%, rgba(64, 224, 208,1) 97%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-right: 0.5 grey solid;
+    padding: 5px;
+}
+
+.mobile-container {
+  height: 100%;
+  display: none;
+  background-color: transparent;
+}
+
+.mobile-sidenav-content {
   display: flex;
-  height: 20%;
-  /* align-items: center; */
-  /* justify-content: center; */
+  align-items: center;
 }
 
-.example-sidenav {
-  padding: 20px;
+.mobile-sidenav {
+  padding: 5px;
+  background: turquoise;
+  background: linear-gradient(117deg, rgba(64, 224, 208,1) 5%, rgba(250,250,250,1) 50%, rgba(64, 224, 208,1) 97%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-width: 250px;
 }
+
+.warp{
+    width: 100%;
+border-bottom: 1px solid black;
+}
+
+@media only screen and (max-width: 800px) {
+    .mobile-container {
+        display: flex
+    }
+    .pc-container{
+        display: none;
+    }
+  }  

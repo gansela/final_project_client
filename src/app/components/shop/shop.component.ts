@@ -18,4 +18,5 @@ export class ShopComponent implements OnInit {
       this.router.navigate(["/home"])
     }
   }
+
 }

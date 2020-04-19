@@ -1,0 +1,31 @@
+.warp{
+    width: 100%;
+border-bottom: 1px solid black;
+display: inline-block;
+padding: 10px;
+}
+
+.example-button-container {
+    display: inline;
+    margin-left: 100px;
+  }
+
+  .l-item{
+      margin: 0px;
+      padding:0px;
+      font-weight: 500;
+      font-size: 0.8em;
+  }
+
+  .err-msg{
+      color:red;
+      padding: 10px;
+      font-size: 0.8em;
+      display: block;
+  }
+
+  .txt-input{
+      display: block;
+      width: 100%;
+      padding: 10px;
+  }

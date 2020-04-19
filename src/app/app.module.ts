@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list'
 
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { AppComponent } from './app.component';
@@ -23,6 +26,10 @@ import { CategoryPipe } from './pipes/category/category.pipe';
 import { ProductCardComponent, ProductCardDialog } from './components/product-card/product-card.component';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { CartCardComponent } from './components/cart-card/cart-card.component';
+import { OrderComponent, OrderDialog } from './components/order/order.component';
+import { HighlightDirective } from './directives/highlight/highlight.directive';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { ProductEditorComponent } from './components/product-editor/product-editor.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +45,16 @@ import { CartCardComponent } from './components/cart-card/cart-card.component';
     ProductCardComponent,
     ProductCardDialog,
     SearchPipe,
-    CartCardComponent
+    CartCardComponent,
+    OrderComponent,
+    HighlightDirective,
+    OrderDialog,
+    AdminHomeComponent,
+    ProductEditorComponent,
   ],
   entryComponents: [
-    ProductCardDialog
+    ProductCardDialog,
+    OrderDialog
   ],
   imports: [
     BrowserModule,
@@ -58,6 +71,9 @@ import { CartCardComponent } from './components/cart-card/cart-card.component';
     MatSidenavModule,
     MatTabsModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule
   ],
   providers: [InterceptorService,
     { useClass: InterceptorService, provide: HTTP_INTERCEPTORS, multi: true }

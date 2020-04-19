@@ -5,6 +5,10 @@
     /* transform: translate3d(-100%, 0px, 0px); */
     
 }
+
+/* .tabs{
+    overflow: scroll;
+} */
 .prod-card{
     flex-grow: 1;
     display: inline-block;
@@ -19,5 +23,11 @@ margin-left: 50px;
 
 
 @media only screen and (max-width: 800px) {
+    .tabs {
+        /* display: flex; */
+        width: 280px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
 
   }  

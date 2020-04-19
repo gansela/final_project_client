@@ -1,0 +1,22 @@
+<div *ngIf="verified" class="admin-body">
+    <mat-sidenav-container class="pc-container">
+        <mat-sidenav mode="side" class="pc-admin" opened>
+            <app-product-editor></app-product-editor>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <app-products [role]="'admin'"></app-products>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+    <mat-drawer-container class="mobile-container" layout-fill>
+        <mat-drawer #drawer class="mobile-sidenav" mode="over" layout-fill>
+            <app-product-editor></app-product-editor>
+        </mat-drawer>
+        <div class="mobile-sidenav-content">
+            <button class="show-button" type="button" mat-raised-button color="accent" (click)="drawer.toggle()">
+                Editor
+            </button>
+            <app-products [role]="'admin'"></app-products>
+        </div>
+
+    </mat-drawer-container>
+</div>

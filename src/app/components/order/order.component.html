@@ -1,0 +1,73 @@
+<div class="order-body">
+    <div tabindex="-1" class="order-div">
+        <h3>
+            <div class="warp">
+                <span>My Order</span>
+                <span class="spacer"></span>
+                <button mat-button routerLink="/shop">Back to shop</button>
+            </div>
+
+        </h3>
+        <div>
+            <form>
+                <mat-form-field class="search-prod">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="prod-card">
+            <div *ngFor=" let prod of products; let i = index">
+                <mat-card class="card-body" appHighlight searchet="{{searchText}}">
+                    <img src="http://localhost:4445/{{imgNameArray[i]}}.jpg" class="little-img">
+                    <h4>{{prod.name}}</h4>
+                    <span>units: {{prod.amount}}</span><span *ngIf="prod.per_kg"> kg</span>
+                    <span class="middle-span">Price: {{prod.price}} ₪</span>
+                </mat-card>
+            </div>
+        </div>
+
+        <div>
+            <span>Total Price: {{cartPrice}}</span>
+
+        </div>
+    </div>
+    <div tabindex="-1" class="order-div">
+        <h3>
+            <div class="warp">Order Details</div>
+        </h3>
+        <div>
+            <form [formGroup]="orderForm">
+                <mat-form-field class="defualt-input">
+                    <mat-label>City (Click to load saved detailes)</mat-label>
+                    <mat-select [class.is-invalid]="city.invalid" formControlName="city" #cty id="city" (click)="loadSavedData(this.details.city, cty.id)" [(ngModel)]="bindCity">
+                        <mat-option *ngFor="let city of citiesArray" [value]="city.name">
+                            {{city.name}}
+                        </mat-option>
+                    </mat-select>
+                    <small [class.d-none]="city.valid || city.untouched" class="text-red">Field Required </small>
+                </mat-form-field>
+                <mat-form-field class="defualt-input">
+                    <mat-label>Street Addres (Double click to load saved detailes)</mat-label>
+                    <input [class.is-invalid]="street.invalid" matInput formControlName="street" #str id="street" (dblclick)="loadSavedData(this.details.street, str.id)" [(ngModel)]="bindStreet" type="text" />
+                    <small [class.d-none]="street.valid || street.untouched" class="text-red" >Field Required  </small>
+                </mat-form-field>
+                <mat-form-field class="defualt-input">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" [min]="minDate" [max]="maxDate" formControlName="date_of_shipping">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                    <small [class.d-none]="date_of_shipping.valid || date_of_shipping.untouched" class="text-red">Must choose available date </small>
+                </mat-form-field>
+                <mat-form-field class="defualt-input">
+                    <mat-label>Enter credit card (only numbers)</mat-label>
+                    <input [class.is-invalid]="credit_card.invalid" matInput formControlName="credit_card" type="password" />
+                    <small [class.d-none]="credit_card.valid || credit_card.untouched" class="text-red">Card not valid </small>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="postOrder()" [disabled]="orderForm.invalid"
+                    class="float-r">Submit Order</button>
+            </form>
+        </div>
+
+    </div>
+</div>

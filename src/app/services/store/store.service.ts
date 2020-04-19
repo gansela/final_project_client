@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +22,6 @@ export class StoreService {
 
   changeCart(data) {
     this.cartRef = data
-    console.log(this.cartRef)
     this.cart.next(data)
   }
 
@@ -31,7 +31,7 @@ export class StoreService {
 
   initCart() {
     this.authService.getCartStatus().subscribe((value: any) => {
-      if (value.status === "no" || value.status === "new user" ) {
+      if (value.status === "no" || value.status === "new user") {
         const date_of_creation = new Date
         this.changeCart({ cart_items: [], date_of_creation, total_price: 0 })
       } else this.changeCart(value.data)
@@ -66,27 +66,66 @@ export class StoreService {
     const newProd = { product_id, name, amount, per_kg, price: newProdPrice }
     const newTotalPrice = this.calculatePrice([...cart_items, newProd])
     this.changeCart({ ...this.cartRef, total_price: newTotalPrice, cart_items: [...cart_items, newProd] })
-    this.updateCart(this.cartRef)
+    this.updateCart()
   }
 
-  calculatePrice(items){
-    return items.reduce((calc, item)=>{
+  calculatePrice(items) {
+    return items.reduce((calc, item) => {
       return calc + item.price
     }, 0)
   }
 
-  removeFromCart(prod){
+  removeFromCart(prod) {
     const { cart_items } = this.cartRef
     const index = cart_items.findIndex(item => item.product_id === prod.product_id && item.price === prod.price)
-    if(index < 0 ) return
+    if (index < 0) return
     cart_items.splice(index, 1)
     const newTotalPrice = this.calculatePrice(cart_items)
     this.changeCart({ ...this.cartRef, total_price: newTotalPrice, cart_items })
+    this.updateCart()
   }
 
-  updateCart(clientCart ){
-    const { basePath } = this
+  deleteCart() {
+    this.changeCart({ ...this.cartRef, total_price: 0, cart_items: [] })
+    this.updateCart()
+  }
+
+  updateCart() {
+    const { basePath, cartRef } = this
     const uri = `${basePath}store/cart`
-    this.http.post(uri, clientCart).toPromise().then(res => console.log(res))
+    this.http.post(uri, { clientCart: cartRef }).toPromise()
+      .then((res: any) => {
+        if (res.err) this.router.navigate(["/home"])
+        console.log(res)
+      })
+  }
+
+  async postOrder(data) {
+    const { basePath, cartRef } = this
+    const uri = `${basePath}store/order`
+    const res: any = await this.http.post(uri, data).toPromise()
+    if (!res.err) {
+      console.log(res)
+    } else {
+      console.log(res)
+    }
+    return res
+  }
+
+  sendRecipt(data) {
+    const { basePath } = this
+    const uri = `${basePath}store/recipt`
+    this.http.post(uri, data, {responseType: 'text'}).toPromise()
+      .then((res: any) => {
+        this.downLoadFile(res, "application/text")
+      })
+  }
+  downLoadFile(data: any, type: string) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    let pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+      alert('Please disable your Pop-up blocker and try again.');
+    }
   }
 }

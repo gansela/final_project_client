@@ -1,0 +1,105 @@
+.order-body{
+    display: flex;
+
+}
+
+.highlightText {
+    background: gold;
+}
+
+.defualt-input{
+    display: block
+}
+
+.text-red{
+    color:red
+}
+
+.d-none{
+    display:  none
+}
+.float-r {
+    float: right;
+}
+
+.btn-actions *{
+    display: inline-block;
+    margin: 5px;
+    font-size: 0.7em;
+    padding: 2px
+}
+.order-div{
+    margin: 20px;
+    height: 500px;
+    border-radius: 5px;
+    flex-grow: 1;
+    opacity: 0.8;
+    padding: 50px;
+    max-width: 500px;
+
+}
+.spacer {
+    flex: 1 1 auto;
+}
+
+.prod-card{
+    min-height: 250px;
+    display: block;
+}
+
+.order-div:focus{
+    outline: none;
+    opacity: 1;
+}
+
+.little-img{
+    max-width: 60px;
+    max-height: 40px;
+    display: inline-block
+}
+
+.card-body{
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: left;
+    justify-content: left;
+    border-bottom: 1px grey solid;
+    margin: 5px;
+    padding: 0px
+}
+
+.card-body * {
+    flex-grow: 1; 
+    text-align: left;
+    padding-right: 20px 
+}
+
+.card-body span {
+    vertical-align: baseline;
+    padding: 21.28px 0px;
+}
+
+.warp{
+    width: 100%;
+border-bottom: 1px solid black;
+display: flex;
+}
+
+.md-dialog-container {
+    width: 350px;
+    height: 350px
+}
+
+@media only screen and (max-width: 800px) {
+    .order-body {
+        display: block;
+
+    }
+    .order-div{
+        padding: 5px;
+        margin: 5px;
+    }
+  }  

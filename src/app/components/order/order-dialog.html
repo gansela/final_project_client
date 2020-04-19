@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+    <br/>
+    <br/>
+    <h2 mat-dialog-title>Order recivied</h2>
+    <span>Would you like a recipt</span>
+    <div mat-dialog-actions class="btn-actions">
+        <button mat-button [mat-dialog-close]="data.mathod" (click)="changeMathod(data.file)"  cdkFocusInitial>Download</button>
+        <button mat-button [mat-dialog-close]="data.mathod" (click)="changeMathod(data.email)" cdkFocusInitial>Via Email</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()">No Thanks</button>
+    </div>
+    <br/>
+    <br/>
+</div>

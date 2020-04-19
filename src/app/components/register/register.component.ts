@@ -41,9 +41,8 @@ export class RegisterComponent implements OnInit {
   async postRegister() {
     const { value: val1 } = this.registerForm1
     const { value: val2 } = this.registerForm2
-    // console.log(val1, val2)
     const res: any = await this.authService.postRegister({ ...val1, ...val2 })
-    // console.log(res)
+
     if (!res) return alert("network error")
     if (res.err) {
       return alert("registration Error")

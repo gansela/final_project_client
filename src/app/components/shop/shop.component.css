@@ -57,4 +57,7 @@ border-bottom: 1px solid black;
     .pc-container{
         display: none;
     }
+    .mobile-sidenav-content {
+      padding-left: 10px;
+    }
   }  

@@ -1,0 +1,44 @@
+<div>
+    <h3>
+        <div class="warp">{{product.name || "Edit Product"}}
+            <div class="example-button-container">
+                <button mat-mini-fab (click)="newProduct()" color="primary">+</button>
+            </div>
+        </div>
+    </h3>
+    <div *ngIf="!isNewProduct">
+        <h4>Double click field to edit</h4>
+        <mat-list role="list">
+            <mat-list-item (dblclick)="openForm(key)" *ngFor="let key of keys" role="listitem" class="l-item">{{key}}:
+                {{product[key]}}</mat-list-item>
+        </mat-list>
+        <mat-form-field *ngIf="editName === 'name' || editName==='image'">
+            <mat-label>{{editName}}</mat-label>
+            <input matInput type="text" #txtVal name="txtVal" (keyup)="changeValues(txtVal.value)">
+        </mat-form-field>
+        <mat-form-field *ngIf="editName === 'price'">
+            <mat-label>{{editName}}</mat-label>
+            <input [min]="0" step="0.01" [max]="9999" #numVal matInput type="number" name="numVal"
+                (change)="changeValues(numVal.value)">
+        </mat-form-field>
+        <mat-form-field *ngIf="editName === 'category'">
+            <mat-label>{{editName}}</mat-label>
+            <mat-select #slctVal name="slctVal" (selectionChange)="changeValues(slctVal.value)">
+                <mat-option *ngFor="let category of categoriesArray" [value]="category.name">{{category.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="editName === 'per_kg'">
+            <mat-label>{{editName}}</mat-label>
+            <mat-select #boolVal name="boolVal" (selectionChange)="changeValues(boolVal.value)">
+                <mat-option  [value]="true" >Yes</mat-option>
+                <mat-option  [value]="false" >No</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <span *ngIf="errMsg" class="err-msg">{{errMsg}}</span>
+    </div>
+    <div *ngIf="isNewProduct">
+        2
+    </div>
+
+</div>

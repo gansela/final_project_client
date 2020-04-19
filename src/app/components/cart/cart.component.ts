@@ -14,11 +14,10 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private storeService: StoreService) {
     this.products = []
     this.cartPrice = 0
-   }
+  }
 
   ngOnInit() {
     this.subscription = this.storeService.getCart().subscribe((value: any) => {
-      console.log(value)
       this.products = value.cart_items
       this.cartPrice = value.total_price
     });
@@ -27,6 +26,10 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
+  }
+
+  clearCart() {
+    this.storeService.deleteCart()
   }
 
 }

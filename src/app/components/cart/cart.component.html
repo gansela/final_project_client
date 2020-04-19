@@ -1,11 +1,19 @@
-<div>
-    <span>Total Price: {{cartPrice}}</span>
-</div>
+
 <div class="prod-card">
     <div *ngFor="let card of products ">
         <app-cart-card [cartObj]="card"></app-cart-card>
     </div>
 </div>
-<div class="buttom-line">
-    <span *ngIf="products.length">Total Price: {{cartPrice}}</span>
+<div >
+    <span >Total Price: {{cartPrice}}</span>
+    <div class="remove-buttom">
+        <button mat-raised-button  color="warn" [disabled]="!products.length" (click)="clearCart()">
+            Clear Cart
+        </button>
+    </div>
+    <div class="order-button">
+        <button mat-raised-button  color="primary" [disabled]="!products.length" routerLink="/order">
+            Order
+        </button>
+    </div>
 </div>

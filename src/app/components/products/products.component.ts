@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { StoreService } from 'src/app/services/store/store.service';
 import { Subscription } from 'rxjs';
 
@@ -9,6 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  @Input() role: string;
   public productsSub = new Subscription()
   public products
   public catList
@@ -22,7 +22,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.productsSub = this.storeService.getProducts().subscribe((value: any) => {
       this.products = value
-      console.log(this.products)
       if (this.products.length) {
         this.catList = this.products.reduce((unique, item) =>
           unique.includes(item.category) ? unique : [...unique, item.category,], [])

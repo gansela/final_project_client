@@ -7,3 +7,14 @@
     flex: 1 1 auto;
 }
 
+.name-small{
+    font-size: 0.7em;
+    vertical-align: bottom;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.name-small span{
+    color: grey;
+    font-size: 0.8em;
+}
+

@@ -2,3 +2,13 @@
     min-height: 400px;
     display: block;
 }
+
+.remove-buttom{
+    display: inline-block;
+    justify-content: center;
+    padding: 0px 10px;
+}
+.order-button{
+    display: inline-block;
+    justify-content: center;
+}

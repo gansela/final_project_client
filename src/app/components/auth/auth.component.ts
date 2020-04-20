@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms"
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ModelService } from 'src/app/services/model/model.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   public cartStatus
   public SpanStatus = "welcome to your first purchuse"
   public cartPrice
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private modelService: ModelService) {
     this.cartStatus = ""
     this.cartPrice = 0
     this.logInForm = this.formBuilder.group({
@@ -29,24 +30,23 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.getCartStatus().subscribe((value: any) => {
       if (value.redirect) this.router.navigate(["/admin"])
       const { status, data } = value
-      console.log(value)
-      if (!status){
+      if (!status) {
         this.cartStatus = ""
         this.SpanStatus = "welcome to your first purchuse"
-      } 
-      else if (status === "new user" ){
+      }
+      else if (status === "new user") {
         this.cartStatus = "Start Shopping"
-      } else if (status === "no"){
+      } else if (status === "no") {
         this.cartStatus = "Start shopping"
         this.SpanStatus = "You have no open cart"
-      } else if (status === "yes"){
+      } else if (status === "yes") {
         this.cartStatus = "resume shopping"
         this.SpanStatus = `You an open cart totaling: ${data.total_price}₪`
-      } 
+      }
     });
     const res: any = await this.authService.postVerify()
     if (res.err) {
-      alert(res.msg)
+      this.modelService.changeModel(res.msg)
       return sessionStorage.setItem('token', "")
     }
   }
@@ -58,12 +58,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   async logInFunc() {
     const { value } = this.logInForm
     const res: any = await this.authService.postLogIn(value)
-    if (!res) return alert("network error")
+    if (!res) return this.modelService.changeModel("network error")
     if (res.err) {
       sessionStorage.setItem('token', "")
-      return alert("authentication error")
+      return this.modelService.changeModel("authentication error")
     }
-    alert("welcome back")
     sessionStorage.setItem('token', res.token);
     this.logInForm.reset()
   }

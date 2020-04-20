@@ -88,7 +88,6 @@ export class OrderComponent implements OnInit {
   async postOrder() {
     const { value } = this.orderForm
     const { cart_id, cartPrice: total_price } = this
-    console.log(value)
     const result = await this.storeService.postOrder({ ...value, cart_id, total_price })
     if (!result.err) {
       this.router.navigate(["/home"])

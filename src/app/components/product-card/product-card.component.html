@@ -6,7 +6,7 @@
         <span> PRICE: {{productObj.price}} ₪</span><span *ngIf="productObj.per_kg"> a kg</span>
         <mat-card-actions class-="card-actions" >
             <button mat-button (click)="openDialog()" *ngIf="role === 'user'">ADD TO CART</button>
-            <button mat-button (click)="openDialog()" *ngIf="role === 'admin'">EDIT</button>
+            <button mat-button *ngIf="role === 'admin'">EDIT</button>
             <button mat-button disabled  *ngIf="role === 'ex'">Log In To Buy</button>
         </mat-card-actions>
     </mat-card-content>

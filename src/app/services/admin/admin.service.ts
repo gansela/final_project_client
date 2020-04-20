@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { StoreService } from '../store/store.service';
 import { AuthService } from '../auth/auth.service';
+import { ModelService } from '../model/model.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AdminService {
   private verified: Subject<boolean>;
   private product: Subject<object>;
   public basePath = "http://localhost:4444/"
-  constructor(private http: HttpClient, private router: Router, private storeService: StoreService, private authService: AuthService) {
+  constructor(private http: HttpClient, private router: Router, private storeService: StoreService, private authService: AuthService, private modelService: ModelService) {
     this.verified = new Subject<boolean>();
     this.product = new Subject<object>();
   }
@@ -34,7 +35,6 @@ export class AdminService {
   }
 
   async postAdminVerify() {
-    console.log("here")
     const { basePath } = this
     const uri = `${basePath}admin/verify`
     const res: any = await this.http.post(uri, {}).toPromise()
@@ -52,7 +52,7 @@ export class AdminService {
     const { basePath } = this
     const uri = `${basePath}admin/categories`
     const res: any = await this.http.get(uri).toPromise()
-    if (res.err) return alert(res.msg)
+    if (res.err) return this.modelService.changeModel(res.msg)
     return res.categories
   }
 
@@ -61,7 +61,7 @@ export class AdminService {
     const uri = `${basePath}admin/updateproduct`
     const res: any = await this.http.post(uri, data).toPromise()
     if (!res.err) {
-      alert(res.msg)
+      this.modelService.changeModel(res.msg)
       this.router.navigate(["/home"])
     }
     this.storeService.getProductsFromServer()
@@ -73,7 +73,7 @@ export class AdminService {
     const uri = `${basePath}admin/addproduct`
     const res: any = await this.http.post(uri, data).toPromise()
     if (!res.err) {
-      alert(res.msg)
+      this.modelService.changeModel(res.msg)
       this.router.navigate(["/home"])
     }
     this.storeService.getProductsFromServer()

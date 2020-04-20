@@ -37,7 +37,6 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.subscription = this.adminService.getProduct().subscribe((value: any) => {
-      console.log(value)
       this.product = { ...value }
       this.prodRef = value
       this.keys = Object.keys(this.product).filter(key => key !== "__v")
@@ -63,7 +62,7 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
   changeValues(val) {
     const { editName, product } = this
     if (editName === "price"){
-      product[editName] = parseInt(val)
+      product[editName] = parseFloat(val)
     } else product[editName] = val
       if (product.image.length < 12) {
         this.errMsg = "real image required"
@@ -78,7 +77,6 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
     if (!val && val !== false) {
       this.errMsg = "field required"
     } else this.errMsg = ""
-    console.log(product)
     this.submitBtn = true ? !_.isEqual(product, this.prodRef) && !this.errMsg : false
   }
   updateProduct(){
@@ -89,6 +87,7 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
 
   postProduct(){
     this.adminService.addProduct(this.newForm.value)
+    this.newForm.reset()
   }
 
   get name() {

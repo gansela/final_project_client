@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Subscription } from 'rxjs';
+import { ModelService } from '../model/model.service';
+
 
 
 
@@ -15,7 +16,7 @@ export class StoreService {
   private cartRef
   private products: Subject<object>;
   public basePath = "http://localhost:4444/"
-    constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+    constructor(private http: HttpClient, private router: Router, private authService: AuthService, private modelService:ModelService) {
     this.cart = new Subject<object>();
     this.products = new Subject<object>();
   }
@@ -48,7 +49,6 @@ export class StoreService {
 
   async getProductsFromServer() {
     const { basePath } = this
-    console.log("store")
     const uri = `${basePath}store/products`
     const res: any = await this.http.get(uri).toPromise()
     if (!res.err) {
@@ -97,7 +97,6 @@ export class StoreService {
     this.http.post(uri, { clientCart: cartRef }).toPromise()
       .then((res: any) => {
         if (res.err) this.router.navigate(["/home"])
-        console.log(res)
       })
   }
 
@@ -105,11 +104,7 @@ export class StoreService {
     const { basePath, cartRef } = this
     const uri = `${basePath}store/order`
     const res: any = await this.http.post(uri, data).toPromise()
-    if (!res.err) {
-      console.log(res)
-    } else {
-      console.log(res)
-    }
+    if (res.err) this.modelService.changeModel(res.msg)
     return res
   }
 
@@ -126,32 +121,29 @@ export class StoreService {
     let url = window.URL.createObjectURL(blob);
     let pwa = window.open(url);
     if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-      alert('Please disable your Pop-up blocker and try again.');
+      this.modelService.changeModel('Please disable your Pop-up blocker and try again.')
     }
   }
 
    async getHomePageProduct(){
     const { basePath } = this
-    console.log("store")
     const uri = `${basePath}homepage/products`
     const res: any = await this.http.get(uri).toPromise()
     if (!res.err) {
       return res
     } 
-    alert("network error, try later")
+    this.modelService.changeModel("network error, try later")
     return
   }
 
   async getOrderDates(){
     const { basePath } = this
-    console.log("store")
     const uri = `${basePath}store/orderdates`
     const res: any = await this.http.get(uri).toPromise()
-    console.log(res)
     if (!res.err) {
       return res.date
     } 
-    alert("network error, try later")
+    this.modelService.changeModel("network error, try later")
     return []
   }
 }

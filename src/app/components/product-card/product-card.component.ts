@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StoreService } from 'src/app/services/store/store.service';
 import { AdminService } from 'src/app/services/admin/admin.service';
+import { ModelService } from 'src/app/services/model/model.service';
 
 
 export interface DialogData {
@@ -17,7 +18,7 @@ export class ProductCardComponent implements OnInit {
   @Input() productObj: any
   @Input() role: string;
   amount: number = 0;
-  constructor(public dialog: MatDialog, private storeService: StoreService, private adminService: AdminService) { }
+  constructor(public dialog: MatDialog, private storeService: StoreService, private adminService: AdminService, private modelService: ModelService) { }
 
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class ProductCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.amount = result;
       if (result) {
-        if (result > 10) alert(" you can purchess maximum 10 units")
+        if (result > 10) this.modelService.changeModel(" you can purchess maximum 10 units")
         else this.storeService.addToCart({ ...this.productObj, amount: result })
       }
     });

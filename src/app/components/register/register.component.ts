@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormBuilder, Validators } from "@angular/forms"
 import { Router } from "@angular/router";
+import { ModelService } from 'src/app/services/model/model.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   public registerForm1
   public registerForm2
   public citiesArray
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private modelService:ModelService) {
     this.page = 1
     this.registerForm1 = this.formBuilder.group({
       id: [null, [Validators.minLength(8), Validators.required, Validators.pattern('[0-9]*')]],
@@ -47,11 +48,11 @@ export class RegisterComponent implements OnInit {
     const { value: val2 } = this.registerForm2
     const res: any = await this.authService.postRegister({ ...val1, ...val2 })
 
-    if (!res) return alert("network error")
+    if (!res) return this.modelService.changeModel("network error")
     if (res.err) {
-      return alert("registration Error")
+      return this.modelService.changeModel("registration error")
     }
-    alert("registration completed")
+    this.modelService.changeModel("registration complete")
     this.registerForm1.reset()
     this.registerForm2.reset()
     this.router.navigate(["/home"])

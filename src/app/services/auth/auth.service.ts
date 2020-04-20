@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
+import { ModelService } from '../model/model.service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ export class AuthService {
   private userName: Subject<string>;
   private cartStatus: Subject<object>;
   public basePath = "http://localhost:4444/"
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modelService: ModelService) {
     this.userName = new Subject<string>();
     this.cartStatus = new Subject<object>();
   }
@@ -52,7 +53,7 @@ export class AuthService {
     const res: any = await this.http.post(uri, data).toPromise()
     if (res.err) {
       this.changeCartStatus("")
-      alert("registration failed")
+      this.modelService.changeModel("registration failed")
     }
     this.changeCartStatus({ status: "new user", data: {} })
     return res
@@ -63,7 +64,7 @@ export class AuthService {
     const uri = `${basePath}auth/id`
     const res: any = await this.http.post(uri, {id}).toPromise()
     if (res.err) {
-      alert(res.msg)
+      this.modelService.changeModel(res.msg)
       return false
     }
     return true
@@ -87,7 +88,7 @@ export class AuthService {
     const { basePath } = this
     const uri = `${basePath}auth/cities`
     const res: any = await this.http.get(uri).toPromise()
-    if (res.err) return alert(res.msg)
+    if (res.err) return this.modelService.changeModel(res.msg)
     return res.cities
   }
 }

@@ -30,6 +30,7 @@ import { OrderComponent, OrderDialog } from './components/order/order.component'
 import { HighlightDirective } from './directives/highlight/highlight.directive';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { ProductEditorComponent } from './components/product-editor/product-editor.component';
+import { ModelComponent, GlobalDialog } from './components/model/model.component';
 
 @NgModule({
   declarations: [
@@ -51,10 +52,13 @@ import { ProductEditorComponent } from './components/product-editor/product-edit
     OrderDialog,
     AdminHomeComponent,
     ProductEditorComponent,
+    ModelComponent,
+    GlobalDialog
   ],
   entryComponents: [
     ProductCardDialog,
-    OrderDialog
+    OrderDialog,
+    GlobalDialog
   ],
   imports: [
     BrowserModule,

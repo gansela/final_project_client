@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'online-market-client';
   public userName
   public subscription = new Subscription()
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.userName = "Guest"
   }
 
@@ -25,4 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
+    logOut(){
+      sessionStorage.setItem('token', "")
+      this.router.navigate(["/home"])
+    }
 }

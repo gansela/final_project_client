@@ -52,6 +52,7 @@
       <g>
       </g>
     </svg>
+    <button mat-button  *ngIf="userName !== 'Guest'" (click)="logOut()">Log Out</button>
     <span class="spacer"></span>
     <div> 
       <span class="name-small">Site by Gan Sela <span>050-4400287</span></span>
@@ -59,5 +60,5 @@
     </div>
   </mat-toolbar>
   <router-outlet ></router-outlet>
-
+  <app-model></app-model>
 </div>

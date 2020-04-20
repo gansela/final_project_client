@@ -19,7 +19,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.storeService.getCart().subscribe((value: any) => {
       this.products = value.cart_items
-      this.cartPrice = value.total_price
+      this.cartPrice = Math.round((value.total_price + Number.EPSILON) * 10) / 10
     });
     this.storeService.initCart()
   }

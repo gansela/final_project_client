@@ -16,7 +16,7 @@ export class StoreService {
   private cartRef
   private products: Subject<object>;
   public basePath = "http://localhost:4444/"
-    constructor(private http: HttpClient, private router: Router, private authService: AuthService, private modelService:ModelService) {
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService, private modelService: ModelService) {
     this.cart = new Subject<object>();
     this.products = new Subject<object>();
   }
@@ -111,8 +111,9 @@ export class StoreService {
   sendRecipt(data) {
     const { basePath } = this
     const uri = `${basePath}store/recipt`
-    this.http.post(uri, data, {responseType: 'text'}).toPromise()
+    this.http.post(uri, data, { responseType: 'text' }).toPromise()
       .then((res: any) => {
+        if (data.mathod === "email") return
         this.downLoadFile(res, "application/text")
       })
   }
@@ -125,24 +126,24 @@ export class StoreService {
     }
   }
 
-   async getHomePageProduct(){
+  async getHomePageProduct() {
     const { basePath } = this
     const uri = `${basePath}homepage/products`
     const res: any = await this.http.get(uri).toPromise()
     if (!res.err) {
       return res
-    } 
+    }
     this.modelService.changeModel("network error, try later")
     return
   }
 
-  async getOrderDates(){
+  async getOrderDates() {
     const { basePath } = this
     const uri = `${basePath}store/orderdates`
     const res: any = await this.http.get(uri).toPromise()
     if (!res.err) {
       return res.date
-    } 
+    }
     this.modelService.changeModel("network error, try later")
     return []
   }

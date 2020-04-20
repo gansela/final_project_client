@@ -59,10 +59,10 @@ export class AuthService {
     return res
   }
 
-  async verifyID(id){
+  async verifyID(id, email){
     const { basePath } = this
     const uri = `${basePath}auth/id`
-    const res: any = await this.http.post(uri, {id}).toPromise()
+    const res: any = await this.http.post(uri, {id, email}).toPromise()
     if (res.err) {
       this.modelService.changeModel(res.msg)
       return false

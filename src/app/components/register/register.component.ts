@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   public registerForm1
   public registerForm2
   public citiesArray
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private modelService:ModelService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private modelService: ModelService) {
     this.page = 1
     this.registerForm1 = this.formBuilder.group({
       id: [null, [Validators.minLength(8), Validators.required, Validators.pattern('[0-9]*')]],
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
   async movePage(num) {
     if (num === 2) {
-      const isContinue: any = await this.authService.verifyID(this.registerForm1.value.id)
+      const isContinue: any = await this.authService.verifyID(this.registerForm1.value.id, this.registerForm1.value.email)
       if (!isContinue) return
       this.page = num
     } else this.page = num

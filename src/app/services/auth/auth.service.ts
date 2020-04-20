@@ -58,6 +58,17 @@ export class AuthService {
     return res
   }
 
+  async verifyID(id){
+    const { basePath } = this
+    const uri = `${basePath}auth/id`
+    const res: any = await this.http.post(uri, {id}).toPromise()
+    if (res.err) {
+      alert(res.msg)
+      return false
+    }
+    return true
+  }
+
   async postVerify() {
     const { basePath } = this
     const uri = `${basePath}store/verify`

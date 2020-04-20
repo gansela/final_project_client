@@ -8,24 +8,44 @@ padding: 10px;
 .example-button-container {
     display: inline;
     margin-left: 100px;
-  }
+}
 
-  .l-item{
-      margin: 0px;
-      padding:0px;
-      font-weight: 500;
-      font-size: 0.8em;
-  }
+ .l-item{
+    margin: 0px;
+    padding:0px;
+    font-weight: 500;
+    font-size: 0.8em;
+}
 
-  .err-msg{
-      color:red;
-      padding: 10px;
-      font-size: 0.8em;
-      display: block;
-  }
+.err-msg{
+    color:red;
+    padding: 10px;
+    font-size: 0.8em;
+    display: block;
+    width: 100%;
+}
 
-  .txt-input{
-      display: block;
-      width: 100%;
-      padding: 10px;
-  }
+.txt-input{
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+.update-btn{
+    display: block
+}
+
+.defualt-input{
+   display: block
+}
+
+.d-none{
+   display: none
+}
+
+.text-red{
+    color: red;
+}
+
+.float-r {
+    float: right;
+}

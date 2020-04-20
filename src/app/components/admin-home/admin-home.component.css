@@ -16,6 +16,8 @@
   .pc-admin{
       min-height: 100vh;
       min-width: 300px;
+      max-width: 300px;
+      overflow-x: scroll;
       background: turquoise;
       background: linear-gradient(117deg, rgba(64, 224, 208,1) 5%, rgba(250,250,250,1) 50%, rgba(64, 224, 208,1) 97%);
       background-repeat: no-repeat;
@@ -28,20 +30,26 @@
     height: 100%;
     display: none;
     background-color: transparent;
+    max-width: 360px;
+  }
+  .mobile-container *{
+    max-width: 300px;
   }
   
   .mobile-sidenav-content {
     display: flex;
     align-items: center;
-  }
+   }
   
   .mobile-sidenav {
     padding: 5px;
     background: turquoise;
+    flex-wrap: wrap;
     background: linear-gradient(117deg, rgba(64, 224, 208,1) 5%, rgba(250,250,250,1) 50%, rgba(64, 224, 208,1) 97%);
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-width: 250px;
+    min-width: 300px;
+
   }
   
 

@@ -38,7 +38,6 @@ export class AdminService {
     const { basePath } = this
     const uri = `${basePath}admin/verify`
     const res: any = await this.http.post(uri, {}).toPromise()
-    console.log(res)
     if (!res.err) {
       this.authService.changeUserName(res.email)
       this.changeVerified(true)
@@ -49,12 +48,36 @@ export class AdminService {
     return res
   }
 
-  async getCategories(){
+  async getCategories() {
     const { basePath } = this
     const uri = `${basePath}admin/categories`
     const res: any = await this.http.get(uri).toPromise()
     if (res.err) return alert(res.msg)
     return res.categories
+  }
+
+  async postUpdatedProduct(data) {
+    const { basePath } = this
+    const uri = `${basePath}admin/updateproduct`
+    const res: any = await this.http.post(uri, data).toPromise()
+    if (!res.err) {
+      alert(res.msg)
+      this.router.navigate(["/home"])
+    }
+    this.storeService.getProductsFromServer()
+    return
+  }
+
+  async addProduct(data) {
+    const { basePath } = this
+    const uri = `${basePath}admin/addproduct`
+    const res: any = await this.http.post(uri, data).toPromise()
+    if (!res.err) {
+      alert(res.msg)
+      this.router.navigate(["/home"])
+    }
+    this.storeService.getProductsFromServer()
+    return
   }
 
   initAdmin() {

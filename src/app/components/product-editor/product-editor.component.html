@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field *ngIf="editName === 'price'">
             <mat-label>{{editName}}</mat-label>
-            <input [min]="0" step="0.01" [max]="9999" #numVal matInput type="number" name="numVal"
+            <input [min]="0" step="0.1" [max]="9999" #numVal matInput type="number" name="numVal"
                 (change)="changeValues(numVal.value)">
         </mat-form-field>
         <mat-form-field *ngIf="editName === 'category'">
@@ -31,14 +31,49 @@
         <mat-form-field *ngIf="editName === 'per_kg'">
             <mat-label>{{editName}}</mat-label>
             <mat-select #boolVal name="boolVal" (selectionChange)="changeValues(boolVal.value)">
-                <mat-option  [value]="true" >Yes</mat-option>
-                <mat-option  [value]="false" >No</mat-option>
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
             </mat-select>
         </mat-form-field>
         <span *ngIf="errMsg" class="err-msg">{{errMsg}}</span>
+        <button mat-button [disabled]="!submitBtn" color="primary" (click)="updateProduct()"  class="update-btn">Submit</button>
     </div>
     <div *ngIf="isNewProduct">
-        2
+        <form [formGroup]="newForm">
+            <mat-form-field class="defualt-input">
+                <mat-label>Name</mat-label>
+                <input [class.is-invalid]="name.invalid" matInput formControlName="name" type="text" />
+                <small [class.d-none]="name.valid || name.untouched" class="text-red">Field Required </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Category</mat-label>
+                <mat-select  [class.is-invalid]="category.invalid" formControlName="category">
+                    <mat-option *ngFor="let cat of categoriesArray" [value]="cat._id">
+                        {{cat.name}}
+                      </mat-option>
+                </mat-select>
+                <small [class.d-none]="category.valid || category.untouched" class="text-red">Field Required </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Price</mat-label>
+                <input [class.is-invalid]="price.invalid" [min]="0" step="0.1" [max]="9999" matInput formControlName="price" type="number" />
+                <small [class.d-none]="price.valid || price.untouched" class="text-red">Price not valid </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Image</mat-label>
+                <input [class.is-invalid]="image.invalid" matInput formControlName="image" type="text" />
+                <small [class.d-none]="image.valid || image.untouched" class="text-red">Real image required </small>
+            </mat-form-field>
+            <mat-form-field class="defualt-input">
+                <mat-label>Per kg</mat-label>
+                <mat-select  [class.is-invalid]="per_kg.invalid" formControlName="per_kg">
+                    <mat-option  [value]="'true'">True</mat-option>
+                    <mat-option  [value]="'false'">False</mat-option>
+                </mat-select>
+                <small [class.d-none]="per_kg.valid || per_kg.untouched" class="text-red">Field Required </small>
+            </mat-form-field>
+            <button mat-button (click)="postProduct()" [disabled]="newForm.invalid" class="float-r">Submit</button>
+        </form>
     </div>
 
 </div>

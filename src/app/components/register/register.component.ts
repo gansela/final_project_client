@@ -34,8 +34,12 @@ export class RegisterComponent implements OnInit {
     this.citiesArray = citiesFromServer
   }
 
-  movePage(num) {
-    this.page = num
+  async movePage(num) {
+    if (num === 2) {
+      const isContinue: any = await this.authService.verifyID(this.registerForm1.value.id)
+      if (!isContinue) return
+      this.page = num
+    } else this.page = num
   }
 
   async postRegister() {

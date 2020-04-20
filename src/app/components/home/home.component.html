@@ -1,7 +1,22 @@
 <div class="main-body">
-    <div > 
+    <div> 
         <app-auth></app-auth>
     </div>
-    <div >2</div>
-    <div >3</div>
+    <div >
+        <h3>
+            <div class="warp">About us</div>
+        </h3>
+        <p>"Online-Market" is a project for Full Stack Wen Development course in the "john Bryce" high tech college.</p>
+        <p> The "Online-Market" was Built using various up to date frameworks and technologies such as Angular, Node JS and Mongo DB.</p>
+        <p>"Online-Market" was built by Gan Sela, a FullStack web developer with expirience in the television news and automotive fields.</p>
+        <span>LinkedIn <a href="https://www.linkedin.com/in/gan-sela-5a4a5433"> link</a></span>
+    </div>
+    <div >
+        <h3>
+            <div class="warp">Our products</div>
+        </h3>
+        <p> "Online-Market" Features a variance of fresh, high quality products in decent prices.
+             when you shop at "online-Market" you can choose from our {{prodNum}} products, such as our product of the week: {{prod.name}} </p>
+             <app-product-card [productObj]="prod" [role]="'ex'"></app-product-card>
+    </div>
 </div>

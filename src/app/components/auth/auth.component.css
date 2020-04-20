@@ -15,3 +15,8 @@
 .d-none{
     display: none
 }
+
+.alert-msg{
+    color: navy;
+    text-decoration: pink;
+}

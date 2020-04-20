@@ -19,7 +19,7 @@
         <div class="prod-card">
             <div *ngFor=" let prod of products; let i = index">
                 <mat-card class="card-body" appHighlight searchet="{{searchText}}">
-                    <img src="http://localhost:4445/{{imgNameArray[i]}}.jpg" class="little-img">
+                    <img src="http://localhost:4445/{{imgNameArray[i]}}.jpg"  class="little-img">
                     <h4>{{prod.name}}</h4>
                     <span>units: {{prod.amount}}</span><span *ngIf="prod.per_kg"> kg</span>
                     <span class="middle-span">Price: {{prod.price}} ₪</span>

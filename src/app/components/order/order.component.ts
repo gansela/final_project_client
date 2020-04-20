@@ -29,6 +29,7 @@ export class OrderComponent implements OnInit {
   public details
   public bindStreet = ""
   public bindCity = null
+  public datesArray = []
   minDate: Date;
   maxDate: Date;
   public mathod = ""
@@ -63,14 +64,13 @@ export class OrderComponent implements OnInit {
     this.cart_id = _id
     this.products = cart_items
     this.details = res.details
-    console.log(this.details)
     this.cartPrice = total_price
     this.imgNames()
     this.authService.getCities()
       .then(res => {
         this.citiesArray = res
-        console.log(res)
       })
+    this.datesArray = await this.storeService.getOrderDates()
   }
 
   imgNames() {
@@ -98,8 +98,14 @@ export class OrderComponent implements OnInit {
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
-    return day !== 5 && day !== 6;
+    const time = d.getTime()
+    return day !== 5 && day !== 6 && !this.datesArray.find(x => x === time) ;
   }
+
+  // myFilter = (d: Date): boolean => {
+  //   const time = d.getTime()
+  //   return !this.datesArray.find(x => x === time)
+  // }
 
   get city() {
     return this.orderForm.get("city")

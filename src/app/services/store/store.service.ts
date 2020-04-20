@@ -15,7 +15,7 @@ export class StoreService {
   private cartRef
   private products: Subject<object>;
   public basePath = "http://localhost:4444/"
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+    constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
     this.cart = new Subject<object>();
     this.products = new Subject<object>();
   }
@@ -48,6 +48,7 @@ export class StoreService {
 
   async getProductsFromServer() {
     const { basePath } = this
+    console.log("store")
     const uri = `${basePath}store/products`
     const res: any = await this.http.get(uri).toPromise()
     if (!res.err) {
@@ -127,5 +128,30 @@ export class StoreService {
     if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
       alert('Please disable your Pop-up blocker and try again.');
     }
+  }
+
+   async getHomePageProduct(){
+    const { basePath } = this
+    console.log("store")
+    const uri = `${basePath}homepage/products`
+    const res: any = await this.http.get(uri).toPromise()
+    if (!res.err) {
+      return res
+    } 
+    alert("network error, try later")
+    return
+  }
+
+  async getOrderDates(){
+    const { basePath } = this
+    console.log("store")
+    const uri = `${basePath}store/orderdates`
+    const res: any = await this.http.get(uri).toPromise()
+    console.log(res)
+    if (!res.err) {
+      return res.date
+    } 
+    alert("network error, try later")
+    return []
   }
 }

@@ -42,6 +42,7 @@ export class AdminService {
       this.authService.changeUserName(res.email)
       this.changeVerified(true)
     } else {
+      await sessionStorage.setItem('token', "")
       this.changeVerified(false)
       this.router.navigate(["/home"])
     }
